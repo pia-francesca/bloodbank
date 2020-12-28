@@ -1,0 +1,26 @@
+DROP TABLE IF EXISTS bloodbank;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS bloodstock;
+
+CREATE TABLE bloodbank (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE user (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL,
+  bloodbank_id INTEGER NOT NULL,
+  FOREIGN KEY (bloodbank_id) REFERENCES bloodbank (id)
+);
+
+CREATE TABLE bloodstock (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  type TEXT NOT NULL,
+  blood_type TEXT NOT NULL,
+  resus TEXT NOT NULL,
+  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  bloodbank_id INTEGER NOT NULL,
+  FOREIGN KEY (bloodbank_id) REFERENCES bloodbank (id)
+);

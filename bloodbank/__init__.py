@@ -25,4 +25,7 @@ def create_app():
     def hello():
         return 'Hello, World!'
 
+    from . import db
+    db.init_app(app)
+
     return app
