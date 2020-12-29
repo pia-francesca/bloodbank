@@ -15,6 +15,7 @@ CREATE TABLE user (
   FOREIGN KEY (bloodbank_id) REFERENCES bloodbank (id)
 );
 
+
 CREATE TABLE bloodstock (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   type TEXT NOT NULL,
