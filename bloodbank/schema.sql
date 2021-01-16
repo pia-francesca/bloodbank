@@ -16,10 +16,13 @@ CREATE TABLE user (
 
 
 CREATE TABLE bloodstock (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  type TEXT NOT NULL,
+  id INTEGER PRIMARY KEY,
   blood_type TEXT NOT NULL,
+  blood_group TEXT NOT NULL,
   rhesus TEXT NOT NULL,
-  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  created TEXT NOT NULL,
+  room INTEGER,
+  fridge INTEGER,
+  shelf INTEGER,
   bloodbank_id INTEGER NOT NULL
 );

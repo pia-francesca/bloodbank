@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Posts{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('bank.input') }}">Add Blood Bags</a>
+  {% endif %}
+{% endblock %}
+
+  {% block content %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Blood Bag ID</th>
+        <th scope="col">Type</th>
+        <th scope="col">Blood Group</th>
+        <th scope="col">Rhesus</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for blood in bloodstock %}
+      <tr>
+        <th scope="row">{{ blood['id'] }}</th>
+        <td>{{ blood['blood_type'] }}</td>
+        <td>{{ blood['blood_group'] }}</td>
+        <td>{{ blood['rhesus'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+<!--
+{% for blood in bloodstock %}
+    <article class="post">
+      <header>
+        <div>
+          <h1>{{ blood['id'] }}</h1>
+          <div class="id">by {{ blood['blood_type'] }} on {{ blood['created']}}</div>
+        </div>
+      </header>
+      <p class="body">{{ blood['blood_group'] }}</p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}-->
+
+
+

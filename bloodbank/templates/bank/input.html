@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Input{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form method = "post">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Blood Bag ID</span>
+            <input type="text" class="form-control" name ="id" id="id" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Blood Type</span>
+            <input type="text" class="form-control" name ="blood_type" id="blood_type" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+        <span  class="input-group-text" id="inputGroup-sizing-default">Blood Group</span>
+            <input type="text" class="form-control" name ="blood_group" id="blood_group" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Rhesus Factor</span>
+            <input type="text" class="form-control" name ="rhesus" id="rhesus" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Date</span>
+            <input type="text" class="form-control" name ="created" id="created" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Room</span>
+            <input type="text" class="form-control" name ="room" id="room" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Fridge</span>
+            <input type="text" class="form-control" name ="fridge" id="fridge" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default">Shelf</span>
+            <input type="text" class="form-control" name ="shelf" id="shelf" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <input type="submit" value="Submit Blood Bag">
+    </form>
+{% endblock %}
