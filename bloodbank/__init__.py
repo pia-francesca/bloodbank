@@ -31,4 +31,8 @@ def create_app():
     from . import auth
     app.register_blueprint(auth.bp)
 
+    from . import bank
+    app.register_blueprint(bank.bp)
+    app.add_url_rule('/', endpoint='index')
+
     return app

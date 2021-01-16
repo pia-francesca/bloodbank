@@ -7,18 +7,52 @@
   <link href="{{ url_for('static', filename='style.css') }}" type=“text/css” rel="stylesheet">
 </head>
 <body>
-  <nav>
-    <h1>Bloodbank</h1>
-    <ul>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Bloodbank</a>
       {% if g.user %}
-        <li><span>{{ g.user['username'] }}</span>
-        <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <span class ="navbar-text">{{ g.user['username'] }}</span>
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" href="{{ url_for('auth.logout') }}">Logout</a>
+              </li>
+            </ul>
+          </div>
       {% else %}
-        <li><a href="{{ url_for('auth.register') }}">Register</a>
-        <li><a href="{{ url_for('auth.login') }}">Log In</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" href="{{ url_for('auth.register') }}">Register</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="{{ url_for('auth.login') }}">Login</a>
+              </li>
+            </ul>
+          </div>
       {% endif %}
-    </ul>
+    </div>
   </nav>
+
+
+  <!--<div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a><span>{{ g.user['username'] }}</span>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="{{ url_for('auth.logout') }}">Logout</a>
+              </li>
+            </ul>
+          </div>-->
+  
   <section class="content">
     <header>
       {% block header %}{% endblock %}

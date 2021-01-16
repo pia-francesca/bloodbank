@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Bloodstock{% endblock %}</h1>
+  {% if g.user %}
+    <p>Hello {{ g.user['username'] }}</p>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h3>Welcome to bloodbank</h3>
+{% endblock %}
