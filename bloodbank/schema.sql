@@ -11,8 +11,7 @@ CREATE TABLE user (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   username TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
-  bloodbank_id INTEGER NOT NULL,
-  FOREIGN KEY (bloodbank_id) REFERENCES bloodbank (id)
+  bloodbank_id INTEGER NOT NULL
 );
 
 
@@ -22,6 +21,5 @@ CREATE TABLE bloodstock (
   blood_type TEXT NOT NULL,
   resus TEXT NOT NULL,
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  bloodbank_id INTEGER NOT NULL,
-  FOREIGN KEY (bloodbank_id) REFERENCES bloodbank (id)
+  bloodbank_id INTEGER NOT NULL
 );

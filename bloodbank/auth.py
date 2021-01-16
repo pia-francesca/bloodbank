@@ -7,15 +7,17 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from bloodbank.db import get_db
 
+
+# creates blueprint named 'auth':
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
-# Register view https://flask.palletsprojects.com/en/1.1.x/tutorial/views/
+
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        bloodbank_id = request.form['bloodbank_id'] #pia
+        bloodbank_id = request.form['bloodbank_id']
         db = get_db()
         error = None
 
@@ -24,16 +26,16 @@ def register():
         elif not password:
             error = 'Password is required.'
         elif not bloodbank_id:
-            error = 'Bloodbank is required' # pia
+            error = 'Connection to a bloodbank is required.'
         elif db.execute(
             'SELECT id FROM user WHERE username = ?', (username,)
         ).fetchone() is not None:
-            error = 'User {} is already registered.'.format(username)
+            error = 'There is already an account registered with this name {}.'.format(username)
 
         if error is None:
             db.execute(
-                'INSERT INTO user (username, password) VALUES (?, ?)',
-                (username, generate_password_hash(password))
+                'INSERT INTO user (username, password, bloodbank_id) VALUES (?, ?, ?)',
+                (username, generate_password_hash(password), bloodbank_id)
             )
             db.commit()
             return redirect(url_for('auth.login'))
@@ -42,7 +44,7 @@ def register():
 
     return render_template('auth/register.html')
 
-# Login view https://flask.palletsprojects.com/en/1.1.x/tutorial/views/
+
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
@@ -68,6 +70,7 @@ def login():
 
     return render_template('auth/login.html')
 
+
 # register a function that runs before the view function, no matter what URL is requested
 @bp.before_app_request
 def load_logged_in_user():
@@ -81,7 +84,7 @@ def load_logged_in_user():
         ).fetchone()
 
 
-# Logout
+# logout
 @bp.route('/logout')
 def logout():
     session.clear()
