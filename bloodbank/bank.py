@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, flash, g, redirect, render_template, request, url_for, session
 )
 from werkzeug.exceptions import abort
 
@@ -23,15 +23,15 @@ def index():
 @bp.route('/overview')
 @login_required
 def overview():
+    user_id = session.get('user_id')
     db = get_db()
     bloodstock = db.execute(
         'SELECT bs.id, blood_type, blood_group, rhesus, created, room, fridge, shelf, bs.bloodbank_id, username'
-        ' FROM bloodstock bs JOIN user u ON bs.bloodbank_id = u.bloodbank_id'
-        ' ORDER BY created DESC'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' ORDER BY created DESC',(user_id,)
     ).fetchall()
+
     return render_template('bank/overview.html', bloodstock=bloodstock)
-
-
 
 
 @bp.route('/input', methods=('GET', 'POST'))
