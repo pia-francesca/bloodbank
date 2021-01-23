@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Remove blood bags{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    <label for="blood_id">Blood Bag ID</label>
+    <input name="blood_id" id="blood_id" required>
+    <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+</form>
+
+{% endblock %}
