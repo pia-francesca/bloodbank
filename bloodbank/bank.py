@@ -74,10 +74,6 @@ def remove():
         user_id = session.get('user_id')
         blood_id = request.form['blood_id']
         db = get_db()
-        bloodbank_id_user = db.execute(
-            'SELECT bloodbank_id FROM user WHERE id = ?', (user_id,)
-        ).fetchone
-        bloodbank_id_blood = db.execute('SELECT bloodbank_id FROM bloodstock WHERE id = ?', (blood_id,)).fetchone
         
         error = None
 
@@ -88,7 +84,6 @@ def remove():
         ).fetchone() is None:
             error = 'The blood bag with the ID {} is not in your bloodbank.'.format(blood_id)
         
-
         if error is not None:
             flash(error)
         else:

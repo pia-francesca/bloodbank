@@ -28,6 +28,10 @@ def register():
         elif not bloodbank_id:
             error = 'Connection to a bloodbank is required.'
         elif db.execute(
+            'SELECT id FROM bloodbank WHERE id = ?', (bloodbank_id,)
+        ).fetchone() is None:
+            error = 'There is no bloodbank registered with this ID.'
+        elif db.execute(
             'SELECT id FROM user WHERE username = ?', (username,)
         ).fetchone() is not None:
             error = 'There is already an account registered with this name {}.'.format(username)
