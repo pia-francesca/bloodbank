@@ -1,12 +1,8 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>{% block title %}Bloodstock{% endblock %}</h1>
-  {% if g.user %}
-    <p>Hello {{ g.user['username'] }}</p>
-  {% endif %}
-{% endblock %}
 
 {% block content %}
-    <h3>Welcome to bloodbank</h3>
+    <div>
+      <img src="{{ url_for('static', filename='blood_transfusion.jpg')}}">
+    </div>
 {% endblock %}
