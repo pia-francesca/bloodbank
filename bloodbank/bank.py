@@ -13,7 +13,7 @@ bp = Blueprint('bank', __name__)
 def index():
     db = get_db()
     bloodstock = db.execute(
-        'SELECT bs.id, blood_type, blood_group, rhesus, created, room, fridge, shelf, bs.bloodbank_id, username'
+        ' SELECT bs.id, blood_type, blood_group, rhesus, created, room, fridge, shelf, bs.bloodbank_id, username'
         ' FROM bloodstock bs JOIN user u ON bs.bloodbank_id = u.bloodbank_id'
         ' ORDER BY created DESC'
     ).fetchall()
@@ -26,7 +26,7 @@ def overview():
     user_id = session.get('user_id')
     db = get_db()
     bloodstock = db.execute(
-        'SELECT bs.id, blood_type, blood_group, rhesus, created, room, fridge, shelf, bs.bloodbank_id, username'
+        ' SELECT bs.id, blood_type, blood_group, rhesus, created, room, fridge, shelf, bs.bloodbank_id, username'
         ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
         ' ORDER BY created DESC',(user_id,)
     ).fetchall()
@@ -66,3 +66,34 @@ def input():
 
     return render_template('bank/input.html')
 
+
+@bp.route('/remove', methods = ('GET', 'POST'))
+@login_required
+def remove():
+    if request.method == 'POST':
+        user_id = session.get('user_id')
+        blood_id = request.form['blood_id']
+        db = get_db()
+        bloodbank_id_user = db.execute(
+            'SELECT bloodbank_id FROM user WHERE id = ?', (user_id,)
+        ).fetchone
+        bloodbank_id_blood = db.execute('SELECT bloodbank_id FROM bloodstock WHERE id = ?', (blood_id,)).fetchone
+        
+        error = None
+
+        if db.execute(
+            'SELECT bs.id'
+            ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+            ' WHERE bs.id = ?', (user_id, blood_id, )
+        ).fetchone() is None:
+            error = 'The blood bag with the ID {} is not in your bloodbank.'.format(blood_id)
+        
+
+        if error is not None:
+            flash(error)
+        else:
+            db.execute('DELETE FROM bloodstock WHERE id = ?', (blood_id,))
+            db.commit()
+
+    return render_template('bank/remove.html')
+     
