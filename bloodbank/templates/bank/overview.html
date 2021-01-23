@@ -5,7 +5,7 @@
   <p> Welcome {{ g.user['username'] }}</p>
 {% endblock %}
 
-  {% block content %}
+{% block content %}
   <table class="table">
     <thead>
       <tr>
@@ -27,21 +27,6 @@
     </tbody>
   </table>
 {% endblock %}
-<!--
-{% for blood in bloodstock %}
-    <article class="post">
-      <header>
-        <div>
-          <h1>{{ blood['id'] }}</h1>
-          <div class="id">by {{ blood['blood_type'] }} on {{ blood['created']}}</div>
-        </div>
-      </header>
-      <p class="body">{{ blood['blood_group'] }}</p>
-    </article>
-    {% if not loop.last %}
-      <hr>
-    {% endif %}
-  {% endfor %}-->
 
 
 
