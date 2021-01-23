@@ -53,16 +53,22 @@
  
   <section class="content">
   <div class ="container-fluid">
+    <br>
+    <br>
     <header>
       {% block header %}{% endblock %}
     </header>
-    
+    <br>
+    <br>
     <main style="min-height: calc(120vh - 253px)">
         {% for message in get_flashed_messages() %}
-          <div class="flash">{{ message }}</div>
+          <div class="alert alert-warning" role="alert">{{ message }}</div>
+          <br>
         {% endfor %}
         {% block content %}{% endblock %}
     </main>
+    <br>
+    <br>
   </section>
   
   <!-- Footer -->
