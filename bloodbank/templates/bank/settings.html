@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <br>
+  <br>  
+  <h1>{% block title %}Your Account{% endblock %}</h1>
+  <br>
+  <br>
+{% endblock %}
+
+{% block content %}
+    <div class="card" style="width: 35rem;">
+        {% for bank in bloodbank %}
+        <div class="card-body">
+          <h5 class="card-title">Account details</h5>
+          <br>
+          <p class="card-text">Username: {{ g.user['username'] }}</p>
+          <p class="card-text">Bloodbank: {{ bank['name'] }}</p>
+          <p class="card-text">Bloodbank ID: {{ bank['id'] }}</p>
+          <a href="#" class="card-link">Reset Password</a>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+
+

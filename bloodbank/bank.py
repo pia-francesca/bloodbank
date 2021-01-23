@@ -11,13 +11,7 @@ bp = Blueprint('bank', __name__)
 
 @bp.route('/')
 def index():
-    db = get_db()
-    bloodstock = db.execute(
-        ' SELECT bs.id, blood_type, blood_group, rhesus, created, room, fridge, shelf, bs.bloodbank_id, username'
-        ' FROM bloodstock bs JOIN user u ON bs.bloodbank_id = u.bloodbank_id'
-        ' ORDER BY created DESC'
-    ).fetchall()
-    return render_template('bank/index.html', bloodstock=bloodstock)
+    return render_template('bank/index.html')
 
 
 @bp.route('/overview')
@@ -91,4 +85,15 @@ def remove():
             db.commit()
 
     return render_template('bank/remove.html')
-     
+
+
+@bp.route("/settings")
+@login_required
+def settings():
+    user_id = session.get('user_id')
+    db = get_db()
+    bloodbank = db.execute(
+        'SELECT b.id, name FROM bloodbank b, user u WHERE u.id = ? AND u.bloodbank_id = b.id', (user_id,)
+    ).fetchall()
+    
+    return render_template('bank/settings.html', bloodbank = bloodbank)
