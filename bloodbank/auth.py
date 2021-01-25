@@ -1,4 +1,5 @@
 import functools
+import re
 
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
@@ -10,6 +11,47 @@ from bloodbank.db import get_db
 
 # creates blueprint named 'auth':
 bp = Blueprint('auth', __name__, url_prefix='/auth')
+
+
+def password_check(password):
+
+    """
+    Verify the strength of 'password'
+    Returns a dict indicating the wrong criteria
+    A password is considered strong if:
+        8 characters length or more
+        1 digit or more
+        1 symbol or more
+        1 uppercase letter or more
+        1 lowercase letter or more
+    """
+
+    # calculating the length
+    length_error = len(password) < 8
+
+    # searching for digits
+    digit_error = re.search(r"\d", password) is None
+
+    # searching for uppercase
+    uppercase_error = re.search(r"[A-Z]", password) is None
+
+    # searching for lowercase
+    lowercase_error = re.search(r"[a-z]", password) is None
+
+    # searching for symbols
+    symbol_error = re.search(r"[ !#$%&'()*+,-./[\\\]^_`{|}~"+r'"]', password) is None
+
+    # overall result
+    password_ok = not ( length_error or digit_error or uppercase_error or lowercase_error or symbol_error )
+    
+    return {
+        'password is ok' : password_ok,
+        'password should be 8 characters' : length_error,
+        'password should contain a number' : digit_error,
+        'Password should contain an uppercase letter' : uppercase_error,
+        'Password should contain an uppercase letter' : lowercase_error,
+        'Password should contain a symbol' : symbol_error,
+    }
 
 
 @bp.route('/register', methods=('GET', 'POST'))
@@ -25,6 +67,10 @@ def register():
             error = 'Username is required.'
         elif not password:
             error = 'Password is required.'
+        elif not password_check(password)['password is ok']:
+            if password_check(password).keys:
+                error= password_check(password)
+    
         elif not bloodbank_id:
             error = 'Connection to a bloodbank is required.'
         elif db.execute(
