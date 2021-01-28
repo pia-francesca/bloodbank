@@ -11,16 +11,6 @@ def create_app():
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'bloodbank.sqlite'),
     )
-    app.config['MAIL_SERVER']='smtp.gmail.com'
-    app.config['MAIL_PORT'] = 465
-    app.config['MAIL_USE_TLS'] = False
-    app.config['MAIL_USE_SSL'] = True
-    app.config['MAIL_DEBUG'] = 
-    app.config['MAIL_USERNAME'] = 
-    app.config['MAIL_PASSWORD']
-    app.config['MAIL_DEFAULT_SENDER']
-    app.config['MAIL_MAX_EMAILS']
-    app.config['MAIL_SUPPRESS_SEND']
 
      # load the instance config, if it exists, when not testing
     app.config.from_pyfile('config.py', silent=True)
