@@ -1,13 +1,25 @@
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for, session
 )
+from flask_wtf import Form
+from wtforms import validators, TextField, TextAreaField, SubmitField, validators, ValidationError
+from wtforms.validators import InputRequired
 from werkzeug.exceptions import abort
-
+from flask_mail import Message, Mail
 from bloodbank.auth import login_required
 from bloodbank.db import get_db
 
+
 bp = Blueprint('bank', __name__)
 
+class ContactForm(Form):
+  name = TextField("Name",  [validators.Required()])
+  email = TextField("Email",  [validators.Required(), validators.Email()])
+  subject = TextField("Subject",  [validators.Required()])
+  message = TextAreaField("Message",  [validators.Required()])
+  submit = SubmitField("Send")
+
+mail = Mail()
 
 @bp.route('/')
 def index():
