@@ -1,31 +1,101 @@
 {% extends 'base.html' %}
 
 {% block header %}
+  <br><br>
   <h1>{% block title %}Overview{% endblock %}</h1>
-  <p> Welcome {{ g.user['username'] }}</p>
+  <br><br> 
 {% endblock %}
 
 {% block content %}
-  <table class="table">
+  <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col">Blood Bag ID</th>
-        <th scope="col">Type</th>
-        <th scope="col">Blood Group</th>
-        <th scope="col">Rhesus</th>
+        <th scope="col">Blood Type</th>
+        <th scope="col">Erythrocytes</th>
+        <th scope="col">Plasma</th>
+        <th scope="col">Thrombocytes</th>
       </tr>
     </thead>
     <tbody>
-      {% for blood in bloodstock %}
       <tr>
-        <th scope="row">{{ blood['id'] }}</th>
-        <td>{{ blood['blood_type'] }}</td>
-        <td>{{ blood['blood_group'] }}</td>
-        <td>{{ blood['rhesus'] }}</td>
+        <th scope="row">A pos</th>
+        <td>{{erythrocytes_A_pos[0]}}</td>
+        <td>{{plasma_A_pos[0]}}</td>
+        <td>{{thrombocytes_A_pos[0]}}</td>
       </tr>
-      {% endfor %}
+      <tr class="table-light">
+        <th scope="row">A neg</th>
+        <td>{{erythrocytes_A_neg[0]}}</td>
+        <td>{{plasma_A_neg[0]}}</td>
+        <td>{{thrombocytes_A_neg[0]}}</td>
+      </tr>
+      <tr>
+        <th scope="row"></th>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th scope="row">B pos</th>
+        <td>{{erythrocytes_B_pos[0]}}</td>
+        <td>{{plasma_B_pos[0]}}</td>
+        <td>{{thrombocytes_B_pos[0]}}</td>
+      </tr>
+      <tr class="table-light">
+        <th scope="row">B neg</th>
+        <td>{{erythrocytes_B_neg[0]}}</td>
+        <td>{{plasma_B_neg[0]}}</td>
+        <td>{{thrombocytes_B_neg[0]}}</td>
+      </tr>
+      <tr>
+        <th scope="row"></th>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th scope="row">AB pos</th>
+        <td>{{erythrocytes_AB_pos[0]}}</td>
+        <td>{{plasma_AB_pos[0]}}</td>
+        <td>{{thrombocytes_AB_pos[0]}}</td>
+      </tr>
+      <tr class="table-light">
+        <th scope="row">AB neg</th>
+        <td>{{erythrocytes_AB_neg[0]}}</td>
+        <td>{{plasma_AB_neg[0]}}</td>
+        <td>{{thrombocytes_AB_neg[0]}}</td>
+      </tr>
+      <tr>
+        <th scope="row"></th>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th scope="row">O pos</th>
+        <td>{{erythrocytes_O_pos[0]}}</td>
+        <td>{{plasma_O_pos[0]}}</td>
+        <td>{{thrombocytes_O_pos[0]}}</td>
+      </tr>
+      <tr class="table-light">
+        <th scope="row">O neg</th>
+        <td>{{erythrocytes_O_neg[0]}}</td>
+        <td>{{plasma_O_neg[0]}}</td>
+        <td>{{thrombocytes_O_neg[0]}}</td>
+      </tr>
     </tbody>
+    <tfoot>
+      <tr>
+        <th scope="row">Total</th>
+        <td>{{erythrocytes[0]}}</td>
+        <td>{{plasma[0]}}</td>
+        <td>{{thrombocytes[0]}}</td>
+      </tr>
+    </tfoot>
   </table>
+
+  
+  
 {% endblock %}
 
 
