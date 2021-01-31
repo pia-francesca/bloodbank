@@ -1,14 +1,19 @@
 {% extends 'base.html' %}
 
 {% block header %}
+  <br><br>   
   <h1>{% block title %}Remove blood bags{% endblock %}</h1>
+  <br><br> 
 {% endblock %}
 
 {% block content %}
+
 <form method="post">
-    <label for="blood_id">Blood Bag ID</label>
-    <input name="blood_id" id="blood_id" required>
-    <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="blood_id">Blood Bag ID</span>
+    <input type="text" class="form-control" name ="blood_id" id="nlood_id" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+  </div>
+  <input type="submit" value="Remove Blood Bag" onclick="return confirm('Are you sure?');">
 </form>
 
 {% endblock %}
