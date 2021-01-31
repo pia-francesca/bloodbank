@@ -14,9 +14,9 @@ def index():
     return render_template('bank/index.html')
 
 
-@bp.route('/overview')
+@bp.route('/overview_old')
 @login_required
-def overview():
+def overview_old():
     user_id = session.get('user_id')
     db = get_db()
     bloodstock = db.execute(
@@ -25,7 +25,205 @@ def overview():
         ' ORDER BY created DESC',(user_id,)
     ).fetchall()
 
-    return render_template('bank/overview.html', bloodstock=bloodstock)
+    return render_template('bank/overview_old.html', bloodstock=bloodstock)
+
+
+@bp.route('/overview')
+@login_required
+def overview():
+    user_id = session.get('user_id')
+    db = get_db()
+
+    erythrocytes = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "erythrocytes"',(user_id,)
+    ).fetchone()
+
+    plasma = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "plasma"',(user_id,)
+    ).fetchone()
+
+    thrombocytes = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "thrombocytes"',(user_id,)
+    ).fetchone()
+
+    erythrocytes_A_pos = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "erythrocytes" AND blood_group = "A" AND rhesus = "+"',(user_id,)
+    ).fetchone()
+
+    erythrocytes_A_neg = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "erythrocytes" AND blood_group = "A" AND rhesus = "-"',(user_id,)
+    ).fetchone()
+
+    erythrocytes_B_pos = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "erythrocytes" AND blood_group = "B" AND rhesus = "+"',(user_id,)
+    ).fetchone()
+
+    erythrocytes_B_neg = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "erythrocytes" AND blood_group = "B" AND rhesus = "-"',(user_id,)
+    ).fetchone()
+    
+    erythrocytes_AB_pos = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "erythrocytes" AND blood_group = "AB" AND rhesus = "+"',(user_id,)
+    ).fetchone()
+    
+    erythrocytes_AB_neg = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "erythrocytes" AND blood_group = "AB" AND rhesus = "-"',(user_id,)
+    ).fetchone()
+
+    erythrocytes_O_pos = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "erythrocytes" AND blood_group = "O" AND rhesus = "+"',(user_id,)
+    ).fetchone()
+
+    erythrocytes_O_neg = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "erythrocytes" AND blood_group = "O" AND rhesus = "-"',(user_id,)
+    ).fetchone()
+
+    plasma_A_pos = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "plasma" AND blood_group = "A" AND rhesus = "+"',(user_id,)
+    ).fetchone()
+
+    plasma_A_neg = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "plasma" AND blood_group = "A" AND rhesus = "-"',(user_id,)
+    ).fetchone()
+
+    plasma_B_pos = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "plasma" AND blood_group = "B" AND rhesus = "+"',(user_id,)
+    ).fetchone()
+
+    plasma_B_neg = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "plasma" AND blood_group = "B" AND rhesus = "-"',(user_id,)
+    ).fetchone()
+
+    plasma_AB_pos = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "plasma" AND blood_group = "AB" AND rhesus = "+"',(user_id,)
+    ).fetchone()
+
+    plasma_AB_neg = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "plasma" AND blood_group = "AB" AND rhesus = "-"',(user_id,)
+    ).fetchone()
+
+    plasma_O_pos = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "plasma" AND blood_group = "O" AND rhesus = "+"',(user_id,)
+    ).fetchone()
+
+    plasma_O_neg = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "plasma" AND blood_group = "O" AND rhesus = "-"',(user_id,)
+    ).fetchone()
+
+    thrombocytes_A_pos = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "thrombocytes" AND blood_group = "A" AND rhesus = "+"',(user_id,)
+    ).fetchone()
+
+    thrombocytes_A_neg = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "thrombocytes" AND blood_group = "A" AND rhesus = "-"',(user_id,)
+    ).fetchone()
+
+    thrombocytes_B_pos = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "thrombocytes" AND blood_group = "B" AND rhesus = "+"',(user_id,)
+    ).fetchone()
+ 
+    thrombocytes_B_neg = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "thrombocytes" AND blood_group = "B" AND rhesus = "-"',(user_id,)
+    ).fetchone()
+
+    thrombocytes_AB_pos = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "thrombocytes" AND blood_group = "AB" AND rhesus = "+"',(user_id,)
+    ).fetchone()
+
+    thrombocytes_AB_neg = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "thrombocytes" AND blood_group = "AB" AND rhesus = "-"',(user_id,)
+    ).fetchone()
+
+    thrombocytes_O_pos = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "thrombocytes" AND blood_group = "O" AND rhesus = "+"',(user_id,)
+    ).fetchone()
+
+    thrombocytes_O_neg = db.execute(
+        ' SELECT COUNT(*)'
+        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        ' WHERE blood_type = "thrombocytes" AND blood_group = "O" AND rhesus = "-"',(user_id,)
+    ).fetchone()
+
+    return render_template('bank/overview.html', 
+                            erythrocytes = erythrocytes, 
+                            plasma = plasma,
+                            thrombocytes = thrombocytes,
+                            erythrocytes_A_pos = erythrocytes_A_pos,
+                            erythrocytes_A_neg = erythrocytes_A_neg, 
+                            erythrocytes_B_pos = erythrocytes_B_pos,
+                            erythrocytes_B_neg = erythrocytes_B_neg,
+                            erythrocytes_AB_pos = erythrocytes_AB_pos,
+                            erythrocytes_AB_neg = erythrocytes_AB_neg,
+                            erythrocytes_O_pos = erythrocytes_O_pos,
+                            erythrocytes_O_neg = erythrocytes_O_neg,
+                            plasma_A_pos = plasma_A_pos,
+                            plasma_A_neg = plasma_A_neg,
+                            plasma_B_pos = plasma_B_pos,
+                            plasma_B_neg = plasma_B_neg,
+                            plasma_AB_pos = plasma_AB_pos,
+                            plasma_AB_neg = plasma_AB_neg,
+                            plasma_O_pos = plasma_O_pos,
+                            plasma_O_neg = plasma_O_neg,
+                            thrombocytes_A_pos = thrombocytes_A_pos,
+                            thrombocytes_A_neg = thrombocytes_A_neg,
+                            thrombocytes_B_pos = thrombocytes_B_pos,
+                            thrombocytes_B_neg = thrombocytes_B_neg,
+                            thrombocytes_AB_pos = thrombocytes_AB_pos,
+                            thrombocytes_AB_neg = thrombocytes_AB_neg,
+                            thrombocytes_O_pos = thrombocytes_O_pos,
+                            thrombocytes_O_neg = thrombocytes_O_neg)
 
 
 @bp.route('/input', methods=('GET', 'POST'))
@@ -97,3 +295,43 @@ def settings():
     ).fetchall()
     
     return render_template('bank/settings.html', bloodbank = bloodbank)
+
+
+@bp.route('/search', methods = ('GET', 'POST'))
+@login_required
+def search():
+    if request.method == 'POST':
+        user_id = session.get('user_id')
+        blood_type = request.form['blood_type']
+        blood_group = request.form['blood_group']
+        rhesus = request.form['rhesus']
+        
+        db = get_db()
+        
+        error = None
+
+        #if db.execute(
+        #    'SELECT bs.id'
+        #    ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+        #    ' WHERE bs.id = ?', (user_id, blood_id, )
+        #).fetchone() is None:
+        #    error = 'The blood bag with the ID {} is not in your bloodbank.'.format(blood_id)
+
+        if db.execute(
+            ' SELECT bs.id'
+            ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+            ' WHERE blood_type = ? AND blood_group = ? AND rhesus = ?'
+            ' ORDER BY created ASC, room, fridge, shelf',(user_id, blood_type, blood_group, rhesus)
+        ).fetchone() is None:
+            flash('None found.')
+        elif error is not None:
+            flash(error)
+        else:
+            blood_search = db.execute(
+            ' SELECT bs.id, created, room, fridge, shelf, blood_type, blood_group, rhesus'
+            ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
+            ' WHERE blood_type = ? AND blood_group = ? AND rhesus = ?'
+            ' ORDER BY created ASC, room, fridge, shelf',(user_id, blood_type, blood_group, rhesus)
+            ).fetchall()
+            return render_template('bank/search.html', blood_search = blood_search)
+    return render_template('bank/search.html')

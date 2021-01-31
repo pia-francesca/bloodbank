@@ -1,43 +1,61 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Add blood bags{% endblock %}</h1>
+    <br><br> 
+    <h1>{% block title %}Add blood bags{% endblock %}</h1>
+    <br><br> 
 {% endblock %}
 
 {% block content %}
-    <form method = "post">
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Blood Bag ID</span>
-            <input type="text" class="form-control" name ="id" id="id" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-        </div>
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Blood Type</span>
-            <input type="text" class="form-control" name ="blood_type" id="blood_type" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-        </div>
-        <div class="input-group mb-3">
-        <span  class="input-group-text" id="inputGroup-sizing-default">Blood Group</span>
-            <input type="text" class="form-control" name ="blood_group" id="blood_group" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-        </div>
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Rhesus Factor</span>
-            <input type="text" class="form-control" name ="rhesus" id="rhesus" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-        </div>
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Date</span>
-            <input type="text" class="form-control" name ="created" id="created" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-        </div>
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Room</span>
-            <input type="text" class="form-control" name ="room" id="room" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-        </div>
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Fridge</span>
-            <input type="text" class="form-control" name ="fridge" id="fridge" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-        </div>
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-default">Shelf</span>
-            <input type="text" class="form-control" name ="shelf" id="shelf" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-        </div>
-        <input type="submit" value="Submit Blood Bag">
-    </form>
+<form method = "post">
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Blood Bag ID</span>
+        <input type="text" class="form-control" name ="id" id="id" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">Blood Component</label>
+        <select class="form-select" name ="blood_type" id="blood_type" required>
+            <option selected></option>
+            <option value="erythrocytes">Erythrocytes</option>
+            <option value="plasma">Plasma</option>
+            <option value="thrombocytes">Thrombocytes</option>
+        </select>
+    </div>
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">Blood Type</label>
+        <select class="form-select" name ="blood_group" id="blood_group" required>
+            <option selected></option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="AB">AB</option>
+            <option value="O">O</option>
+        </select>
+    </div>
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">Rhesus Factor</label>
+        <select class="form-select" name ="rhesus" id="rhesus" required>
+            <option selected></option>
+            <option value="+">positive</option>
+            <option value="-">negative</option>
+        </select>
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Date</span>
+        <input type="text" class="form-control" name ="created" id="created" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Room</span>
+        <input type="text" class="form-control" name ="room" id="room" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Fridge</span>
+        <input type="text" class="form-control" name ="fridge" id="fridge" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Shelf</span>
+        <input type="text" class="form-control" name ="shelf" id="shelf" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <input type="submit" value="Submit Blood Bag">
+</form>
+
 {% endblock %}
