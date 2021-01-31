@@ -2,7 +2,7 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for, session
 )
 from flask_wtf import Form
-from wtforms import validators, TextField, TextAreaField, SubmitField, validators, ValidationError
+from wtforms import validators, TextField, TextAreaField, SubmitField, ValidationError, StringField, SelectField
 from wtforms.validators import InputRequired
 from werkzeug.exceptions import abort
 from flask_mail import Message, Mail
@@ -10,6 +10,7 @@ from bloodbank.auth import login_required
 from bloodbank.db import get_db
 
 
+mail = Mail()
 bp = Blueprint('bank', __name__)
 
 class ContactForm(Form):
@@ -19,7 +20,7 @@ class ContactForm(Form):
   message = TextAreaField("Message",  [validators.Required()])
   submit = SubmitField("Send")
 
-mail = Mail()
+
 
 @bp.route('/')
 def index():
@@ -109,3 +110,28 @@ def settings():
     ).fetchall()
     
     return render_template('bank/settings.html', bloodbank = bloodbank)
+
+
+@bp.route('/contact', methods=['GET', 'POST'])
+def contact():
+  form = ContactForm()
+
+  if request.method == 'POST':
+    if form.validate() == False:
+      flash('All fields are required.')
+      return render_template('bank/contact.html', form=form)
+    else:
+      msg = Message(form.subject.data, sender='contact@example.com', recipients=['your_email@example.com'])
+      msg.body = """
+      From: %s <%s>
+      %s
+      """ % (form.name.data, form.email.data, form.message.data)
+      mail.send(msg)
+
+      return render_template('bank/contact.html', success=True)
+
+  elif request.method == 'GET':
+    return render_template('bank/contact.html', form=form)
+
+
+
