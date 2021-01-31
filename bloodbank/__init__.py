@@ -11,6 +11,7 @@ def create_app():
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'bloodbank.sqlite'),
     )
+<<<<<<< HEAD
     app.config.update(dict(
     DEBUG = True,
     MAIL_SERVER = 'smtp.gmail.com',
@@ -22,6 +23,10 @@ def create_app():
 ))
     mail = Mail()
     mail.init_app(app)
+=======
+
+
+>>>>>>> main
      # load the instance config, if it exists, when not testing
   
 
