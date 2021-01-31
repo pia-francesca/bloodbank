@@ -1,6 +1,6 @@
 import os
 
-
+from flask_mail import Message, Mail
 from flask import Flask
 
 # application factory function
@@ -11,19 +11,21 @@ def create_app():
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'bloodbank.sqlite'),
     )
-    app.config['MAIL_SERVER']='smtp.gmail.com'
-    app.config['MAIL_PORT'] = 465
-    app.config['MAIL_USE_TLS'] = False
-    app.config['MAIL_USE_SSL'] = True
-    app.config['MAIL_DEBUG'] = 
-    app.config['MAIL_USERNAME'] = 
-    app.config['MAIL_PASSWORD']
-    app.config['MAIL_DEFAULT_SENDER']
-    app.config['MAIL_MAX_EMAILS']
-    app.config['MAIL_SUPPRESS_SEND']
-
+    app.config.update(dict(
+    DEBUG = True,
+    MAIL_SERVER = 'smtp.gmail.com',
+    MAIL_PORT = 587,
+    MAIL_USE_TLS = True,
+    MAIL_USE_SSL = False,
+    MAIL_USERNAME = 'testingbloodbank@gmail.com',
+    MAIL_PASSWORD = 'ALal1029',
+))
+    mail = Mail()
+    mail.init_app(app)
      # load the instance config, if it exists, when not testing
-    app.config.from_pyfile('config.py', silent=True)
+  
+
+    app.secret_key = 'development key'
 
     # ensure the instance folder exists
     try:
