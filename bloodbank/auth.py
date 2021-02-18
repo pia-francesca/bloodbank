@@ -56,6 +56,11 @@ def password_check(password):
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
+    db = get_db()
+    bloodbanks = db.execute(
+        ' SELECT id, name'
+        ' FROM bloodbank'
+    ).fetchall()
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -92,7 +97,7 @@ def register():
 
         flash(error)
 
-    return render_template('auth/register.html')
+    return render_template('auth/register.html', bloodbanks = bloodbanks)
 
 
 @bp.route('/login', methods=('GET', 'POST'))

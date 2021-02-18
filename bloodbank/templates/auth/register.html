@@ -3,33 +3,44 @@
 {% block header %}
   <br>
   <br>
-  <h1>{% block title %}Register{% endblock %}</h1>
   <br>
   <br>
 {% endblock %}
 
-{% block content %}  
-  <form method="post">
-    <div class="col-md-6">
-      <label for="username" class="form-label">Username</label>
-      <input type="text" class="form-control" name="username" id = "username" required>
-    </div>
-    <br>
-    <div class="col-md-6">
-      <label for="bloodbank_id" class="form-label">Bloodbank ID</label>
-      <input type="text" class="form-control" name="bloodbank_id" id = "bloodbank_id" required>
-    </div>
-    <br>
-    <div class="col-md-6">
-      <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" id="password" aria-label="Password" name="password" id="password" required>
-    </div>
-    <br>
-    <br>
-    <br>
-    <button type="submit" class="btn btn-info">Register</button>
-    <br>
-    <br>
-    <br>
-  </form>
+{% block content %}
+<div class="card text-dark bg-light mb-3" style="max-width: 22rem;">
+  <h5 class="card-header text-light bg-secondary">Register</h5>
+    <div class="card-body">
+    <form method="post">
+      <div class="col-md-14">
+        <!--<label for="username" class="form-label">Username</label>-->
+        <input type="text" class="form-control" name="username" id = "username" placeholder="Username" required>
+      </div>
+      <br>
+      <div class="col-md-14">
+        <input type="text" class="form-control" name="email" id = "email" placeholder="Email" required>
+      </div>
+      <br>
+      <div class="input-group mb-3">
+        <select class="form-select" name="bloodbank_id" id = "bloodbank_id" required>
+            {% for bloodbank in bloodbanks %}
+              <option value="{{ bloodbank['id']}}">{{ bloodbank['name']}}</option>
+            {% endfor %}
+        </select> 
+      </div>
+      <!--
+      <div class="col-md-14">
+        <input type="text" class="form-control" name="bloodbank_id" id = "bloodbank_id" placeholder = "Bloodbank" required>
+      </div>
+      <br>-->
+      <div class="col-md-14">
+        <!--<label for="password" class="form-label">Password</label>-->
+        <input type="password" class="form-control" id="password" aria-label="Password" name="password" id="password" placeholder="Password" required>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-danger d-grid gap-2 col-6 mx-auto">Register</button>
+      <br>
+    </form>
+  </div>
+</div>
 {% endblock %}

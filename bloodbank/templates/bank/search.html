@@ -8,37 +8,40 @@
 
 {% block content %}
 
-
-<form method = "post">
-  <div class="input-group mb-3">
-    <label class="input-group-text" for="inputGroupSelect01">Blood Component</label>
-    <select class="form-select" name ="blood_type" id="blood_type" required>
-        <option selected></option>
-        <option value="erythrocytes">Erythrocytes</option>
-        <option value="plasma">Plasma</option>
-        <option value="thrombocytes">Thrombocytes</option>
-    </select>
+<div class="card text-dark bg-light mb-3" style="max-width: 36rem;">
+  <div class="card-body">
+    <form method = "post">
+      <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">Blood Component</label>
+        <select class="form-select" name ="blood_type" id="blood_type" required>
+            <option selected></option>
+            <option value="erythrocytes">Erythrocytes</option>
+            <option value="plasma">Plasma</option>
+            <option value="thrombocytes">Thrombocytes</option>
+        </select>
+      </div>
+      <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">Blood Type</label>
+        <select class="form-select" name ="blood_group" id="blood_group" required>
+            <option selected></option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="AB">AB</option>
+            <option value="O">O</option>
+        </select>
+      </div>
+      <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">Rhesus Factor</label>
+        <select class="form-select" name ="rhesus" id="rhesus" required>
+            <option selected></option>
+            <option value="+">positive</option>
+            <option value="-">negative</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-danger d-grid gap-2 col-6 mx-auto">Search</button>
+    </form>
   </div>
-  <div class="input-group mb-3">
-    <label class="input-group-text" for="inputGroupSelect01">Blood Type</label>
-    <select class="form-select" name ="blood_group" id="blood_group" required>
-        <option selected></option>
-        <option value="A">A</option>
-        <option value="B">B</option>
-        <option value="AB">AB</option>
-        <option value="O">O</option>
-    </select>
-  </div>
-  <div class="input-group mb-3">
-    <label class="input-group-text" for="inputGroupSelect01">Rhesus Factor</label>
-    <select class="form-select" name ="rhesus" id="rhesus" required>
-        <option selected></option>
-        <option value="+">positive</option>
-        <option value="-">negative</option>
-    </select>
-  </div>
-  <input type="submit" value="Search">
-</form>
+</div>
 
 <br><br>
 
