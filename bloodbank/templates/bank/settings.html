@@ -7,18 +7,20 @@
 {% endblock %}
 
 {% block content %}
-    <div class="card" style="width: 35rem;">
-        {% for bank in bloodbank %}
-        <div class="card-body">
-          <h5 class="card-title">Account details</h5>
-          <br>
-          <p class="card-text">Username: {{ g.user['username'] }}</p>
-          <p class="card-text">Bloodbank: {{ bank['name'] }}</p>
-          <p class="card-text">Bloodbank ID: {{ bank['id'] }}</p>
-          <a href="#" class="card-link">Reset Password</a>
-        </div>
-        {% endfor %}
-    </div>
+<div style="min-height: 400px;">
+  <div class="card text-dark bg-light" style="max-width: 30rem;">
+    <div class="card-body">
+          {% for bank in bloodbank %}
+          <div class="card-body">
+            <p class="card-text">Username: <strong>{{ g.user['username'] }}</strong></p>
+            <p class="card-text">Bloodbank: <strong>{{ bank['name'] }}</strong></p>
+            <p class="card-text">Bloodbank ID: <strong>{{ bank['id'] }}</strong></p>
+            <a href="#" class="card-link">Reset Password</a>
+          </div>
+          {% endfor %}
+      </div>
+  </div>
+</div>
 {% endblock %}
 
 
