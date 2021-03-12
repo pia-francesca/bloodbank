@@ -8,6 +8,7 @@ from werkzeug.exceptions import abort
 from flask_mail import Message, Mail
 from bloodbank.auth import login_required
 from bloodbank.db import get_db
+from datetime import datetime
 
 
 mail = Mail()
@@ -323,12 +324,6 @@ def search():
         
         error = None
 
-        #if db.execute(
-        #    'SELECT bs.id'
-        #    ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
-        #    ' WHERE bs.id = ?', (user_id, blood_id, )
-        #).fetchone() is None:
-        #    error = 'The blood bag with the ID {} is not in your bloodbank.'.format(blood_id)
 
         if db.execute(
             ' SELECT bs.id'
@@ -346,6 +341,7 @@ def search():
             ' WHERE blood_type = ? AND blood_group = ? AND rhesus = ?'
             ' ORDER BY created ASC, room, fridge, shelf',(user_id, blood_type, blood_group, rhesus)
             ).fetchall()
+
             return render_template('bank/search.html', blood_search = blood_search)
     return render_template('bank/search.html')
 

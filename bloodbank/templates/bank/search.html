@@ -8,72 +8,70 @@
 
 {% block content %}
 
-<div class="card text-dark bg-light mb-3" style="max-width: 36rem;">
-  <div class="card-body">
-    <form method = "post">
-      <div class="input-group mb-3">
-        <label class="input-group-text" for="inputGroupSelect01">Blood Component</label>
-        <select class="form-select" name ="blood_type" id="blood_type" required>
-            <option selected></option>
-            <option value="erythrocytes">Erythrocytes</option>
-            <option value="plasma">Plasma</option>
-            <option value="thrombocytes">Thrombocytes</option>
-        </select>
-      </div>
-      <div class="input-group mb-3">
-        <label class="input-group-text" for="inputGroupSelect01">Blood Type</label>
-        <select class="form-select" name ="blood_group" id="blood_group" required>
-            <option selected></option>
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="AB">AB</option>
-            <option value="O">O</option>
-        </select>
-      </div>
-      <div class="input-group mb-3">
-        <label class="input-group-text" for="inputGroupSelect01">Rhesus Factor</label>
-        <select class="form-select" name ="rhesus" id="rhesus" required>
-            <option selected></option>
-            <option value="+">positive</option>
-            <option value="-">negative</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-danger d-grid gap-2 col-6 mx-auto">Search</button>
-    </form>
+  <div class="card text-dark bg-light mb-3" style="max-width: 36rem;">
+    <div class="card-body">
+      <form method = "post">
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="inputGroupSelect01">Blood Component</label>
+          <select class="form-select" name ="blood_type" id="blood_type" required>
+              <option selected></option>
+              <option value="erythrocytes">Erythrocytes</option>
+              <option value="plasma">Plasma</option>
+              <option value="thrombocytes">Thrombocytes</option>
+          </select>
+        </div>
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="inputGroupSelect01">Blood Type</label>
+          <select class="form-select" name ="blood_group" id="blood_group" required>
+              <option selected></option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="AB">AB</option>
+              <option value="O">O</option>
+          </select>
+        </div>
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="inputGroupSelect01">Rhesus Factor</label>
+          <select class="form-select" name ="rhesus" id="rhesus" required>
+              <option selected></option>
+              <option value="+">positive</option>
+              <option value="-">negative</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-danger d-grid gap-2 col-6 mx-auto">Search</button>
+      </form>
+    </div>
   </div>
-</div>
-
-<br><br>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Blood Bag ID</th>
-      <th scope="col">Blood Type</th>
-      <th scope="col">Group</th>
-      <th scope="col">Date</th>
-      <th scope="col">Room</th>
-      <th scope="col">Fridge</th>
-      <th scope="col">Shelf</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for blood in blood_search %}
-    <tr>
-      <th scope="row">{{ blood['id'] }}</th>
-      <td>{{ blood['blood_type'] }}</td>
-      <td>{{ blood['blood_group'] }} {{blood['rhesus']}}</td>
-      <td>{{ blood['created'] }}</td>
-      <td>{{ blood['room'] }}</td>
-      <td>{{ blood['fridge'] }}</td>
-      <td>{{ blood['shelf'] }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
-
   
+  <br><br>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Blood Bag ID</th>
+        <th scope="col">Blood Type</th>
+        <th scope="col">Group</th>
+        <th scope="col">Date</th>
+        <th scope="col">Room</th>
+        <th scope="col">Fridge</th>
+        <th scope="col">Shelf</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for blood in blood_search %}
+      <tr>
+        <th scope="row">{{ blood['id'] }}</th>
+        <td>{{ blood['blood_type'] }}</td>
+        <td>{{ blood['blood_group'] }} {{blood['rhesus']}}</td>
+        <td>{{ blood['created'] }}</td>
+        <td>{{ blood['room'] }}</td>
+        <td>{{ blood['fridge'] }}</td>
+        <td>{{ blood['shelf'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
 {% endblock %}
 
 
