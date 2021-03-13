@@ -28,19 +28,6 @@ def index():
     return render_template('bank/index.html')
 
 
-@bp.route('/overview_old')
-@login_required
-def overview_old():
-    user_id = session.get('user_id')
-    db = get_db()
-    bloodstock = db.execute(
-        ' SELECT bs.id, blood_type, blood_group, rhesus, created, room, fridge, shelf, bs.bloodbank_id, username'
-        ' FROM bloodstock bs JOIN (SELECT * FROM user WHERE id = ?) u ON bs.bloodbank_id = u.bloodbank_id'
-        ' ORDER BY created DESC',(user_id,)
-    ).fetchall()
-
-    return render_template('bank/overview_old.html', bloodstock=bloodstock)
-
 
 @bp.route('/overview')
 @login_required
@@ -299,7 +286,7 @@ def remove():
     return render_template('bank/remove.html')
 
 
-@bp.route("/settings")
+@bp.route('/settings')
 @login_required
 def settings():
     user_id = session.get('user_id')
